@@ -9,6 +9,9 @@ const (
 
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_inference"
+
+	InferenceKey      = "Inference/value/"
+	InferenceCountKey = "Inference/count/"
 )
 
 var (

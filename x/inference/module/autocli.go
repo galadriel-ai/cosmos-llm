@@ -28,6 +28,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
 				},
+				{
+					RpcMethod:      "RunInference",
+					Use:            "run-inference [prompt] [modelid]",
+					Short:          "Send a runInference tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "prompt"}, {ProtoField: "modelid"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

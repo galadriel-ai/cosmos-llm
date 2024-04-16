@@ -51,3 +51,12 @@ func (k Keeper) GetAuthority() string {
 func (k Keeper) Logger() log.Logger {
 	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
+
+var models = map[uint64]string{
+	1: "gpt-4.5-turbo",
+}
+
+func GetModelById(key uint64) (string, bool) {
+	value, exists := models[key]
+	return value, exists
+}
