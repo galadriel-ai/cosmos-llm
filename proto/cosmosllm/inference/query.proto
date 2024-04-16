@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package cosmosllm.inference;
 
 import "amino/amino.proto";
@@ -6,25 +7,40 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "cosmosllm/inference/params.proto";
+import "cosmosllm/inference/inferencerun.proto";
 
 option go_package = "cosmos-llm/x/inference/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/cosmos-llm/inference/params";
+  
+  }
+  
+  // Queries a list of GetInferenceRun items.
+  rpc GetInferenceRun (QueryGetInferenceRunRequest) returns (QueryGetInferenceRunResponse) {
+    option (google.api.http).get = "/cosmos-llm/inference/get_inference_run/{id}";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
-  Params params = 1 [
-    (gogoproto.nullable) = false,
-    (amino.dont_omitempty) = true
-  ];
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
+
+message QueryGetInferenceRunRequest {
+  uint64 id = 1;
+}
+
+message QueryGetInferenceRunResponse {
+  Inferencerun inference = 1;
+}
+

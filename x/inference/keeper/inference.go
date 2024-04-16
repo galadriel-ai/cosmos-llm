@@ -47,7 +47,7 @@ func (k Keeper) SetInferencerunCount(ctx sdk.Context, count uint64) {
 	store.Set(byteKey, bz)
 }
 
-func (k Keeper) GetInferenceRun(ctx sdk.Context, id uint64) (val types.Inferencerun, found bool) {
+func (k Keeper) GetInferencerun(ctx sdk.Context, id uint64) (val types.Inferencerun, found bool) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.InferenceKey))
 	b := store.Get(GetAgentrunIDBytes(id))
