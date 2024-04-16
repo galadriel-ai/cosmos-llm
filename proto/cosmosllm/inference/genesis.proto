@@ -1,0 +1,17 @@
+syntax = "proto3";
+package cosmosllm.inference;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "cosmosllm/inference/params.proto";
+
+option go_package = "cosmos-llm/x/inference/types";
+
+// GenesisState defines the inference module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
