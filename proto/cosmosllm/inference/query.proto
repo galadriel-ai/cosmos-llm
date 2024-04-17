@@ -25,6 +25,12 @@ service Query {
     option (google.api.http).get = "/cosmos-llm/inference/get_inference_run/{id}";
   
   }
+  
+  // Queries a list of GetPoolSize items.
+  rpc GetPoolSize (QueryGetPoolSizeRequest) returns (QueryGetPoolSizeResponse) {
+    option (google.api.http).get = "/cosmos-llm/inference/get_pool_size";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -42,5 +48,11 @@ message QueryGetInferenceRunRequest {
 
 message QueryGetInferenceRunResponse {
   Inferencerun inference = 1;
+}
+
+message QueryGetPoolSizeRequest {}
+
+message QueryGetPoolSizeResponse {
+  uint64 size = 1;
 }
 
