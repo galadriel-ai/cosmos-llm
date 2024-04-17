@@ -14,6 +14,7 @@ import (
 
 var (
 	md_StakedGpuNode              protoreflect.MessageDescriptor
+	fd_StakedGpuNode_id           protoreflect.FieldDescriptor
 	fd_StakedGpuNode_owner        protoreflect.FieldDescriptor
 	fd_StakedGpuNode_stake        protoreflect.FieldDescriptor
 	fd_StakedGpuNode_denom        protoreflect.FieldDescriptor
@@ -25,6 +26,7 @@ var (
 func init() {
 	file_cosmosllm_inference_staked_gpu_node_proto_init()
 	md_StakedGpuNode = File_cosmosllm_inference_staked_gpu_node_proto.Messages().ByName("StakedGpuNode")
+	fd_StakedGpuNode_id = md_StakedGpuNode.Fields().ByName("id")
 	fd_StakedGpuNode_owner = md_StakedGpuNode.Fields().ByName("owner")
 	fd_StakedGpuNode_stake = md_StakedGpuNode.Fields().ByName("stake")
 	fd_StakedGpuNode_denom = md_StakedGpuNode.Fields().ByName("denom")
@@ -98,6 +100,12 @@ func (x *fastReflection_StakedGpuNode) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_StakedGpuNode) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Id != "" {
+		value := protoreflect.ValueOfString(x.Id)
+		if !f(fd_StakedGpuNode_id, value) {
+			return
+		}
+	}
 	if x.Owner != "" {
 		value := protoreflect.ValueOfString(x.Owner)
 		if !f(fd_StakedGpuNode_owner, value) {
@@ -149,6 +157,8 @@ func (x *fastReflection_StakedGpuNode) Range(f func(protoreflect.FieldDescriptor
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_StakedGpuNode) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "cosmosllm.inference.StakedGpuNode.id":
+		return x.Id != ""
 	case "cosmosllm.inference.StakedGpuNode.owner":
 		return x.Owner != ""
 	case "cosmosllm.inference.StakedGpuNode.stake":
@@ -177,6 +187,8 @@ func (x *fastReflection_StakedGpuNode) Has(fd protoreflect.FieldDescriptor) bool
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_StakedGpuNode) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "cosmosllm.inference.StakedGpuNode.id":
+		x.Id = ""
 	case "cosmosllm.inference.StakedGpuNode.owner":
 		x.Owner = ""
 	case "cosmosllm.inference.StakedGpuNode.stake":
@@ -205,6 +217,9 @@ func (x *fastReflection_StakedGpuNode) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_StakedGpuNode) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "cosmosllm.inference.StakedGpuNode.id":
+		value := x.Id
+		return protoreflect.ValueOfString(value)
 	case "cosmosllm.inference.StakedGpuNode.owner":
 		value := x.Owner
 		return protoreflect.ValueOfString(value)
@@ -243,6 +258,8 @@ func (x *fastReflection_StakedGpuNode) Get(descriptor protoreflect.FieldDescript
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_StakedGpuNode) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "cosmosllm.inference.StakedGpuNode.id":
+		x.Id = value.Interface().(string)
 	case "cosmosllm.inference.StakedGpuNode.owner":
 		x.Owner = value.Interface().(string)
 	case "cosmosllm.inference.StakedGpuNode.stake":
@@ -275,6 +292,8 @@ func (x *fastReflection_StakedGpuNode) Set(fd protoreflect.FieldDescriptor, valu
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_StakedGpuNode) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "cosmosllm.inference.StakedGpuNode.id":
+		panic(fmt.Errorf("field id of message cosmosllm.inference.StakedGpuNode is not mutable"))
 	case "cosmosllm.inference.StakedGpuNode.owner":
 		panic(fmt.Errorf("field owner of message cosmosllm.inference.StakedGpuNode is not mutable"))
 	case "cosmosllm.inference.StakedGpuNode.stake":
@@ -300,6 +319,8 @@ func (x *fastReflection_StakedGpuNode) Mutable(fd protoreflect.FieldDescriptor) 
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_StakedGpuNode) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "cosmosllm.inference.StakedGpuNode.id":
+		return protoreflect.ValueOfString("")
 	case "cosmosllm.inference.StakedGpuNode.owner":
 		return protoreflect.ValueOfString("")
 	case "cosmosllm.inference.StakedGpuNode.stake":
@@ -381,6 +402,10 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
+		l = len(x.Id)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		l = len(x.Owner)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
@@ -433,34 +458,41 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 		if x.ModelId != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.ModelId))
 			i--
-			dAtA[i] = 0x30
+			dAtA[i] = 0x38
 		}
 		if x.FailCount != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.FailCount))
 			i--
-			dAtA[i] = 0x28
+			dAtA[i] = 0x30
 		}
 		if x.SuccessCount != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.SuccessCount))
 			i--
-			dAtA[i] = 0x20
+			dAtA[i] = 0x28
 		}
 		if len(x.Denom) > 0 {
 			i -= len(x.Denom)
 			copy(dAtA[i:], x.Denom)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Denom)))
 			i--
-			dAtA[i] = 0x1a
+			dAtA[i] = 0x22
 		}
 		if x.Stake != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.Stake))
 			i--
-			dAtA[i] = 0x10
+			dAtA[i] = 0x18
 		}
 		if len(x.Owner) > 0 {
 			i -= len(x.Owner)
 			copy(dAtA[i:], x.Owner)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Owner)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.Id) > 0 {
+			i -= len(x.Id)
+			copy(dAtA[i:], x.Id)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Id)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -515,6 +547,38 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Id = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Owner", wireType)
 				}
 				var stringLen uint64
@@ -545,7 +609,7 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 				}
 				x.Owner = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 2:
+			case 3:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Stake", wireType)
 				}
@@ -564,7 +628,7 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
-			case 3:
+			case 4:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Denom", wireType)
 				}
@@ -596,7 +660,7 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 				}
 				x.Denom = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 4:
+			case 5:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field SuccessCount", wireType)
 				}
@@ -615,7 +679,7 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
-			case 5:
+			case 6:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field FailCount", wireType)
 				}
@@ -634,7 +698,7 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
-			case 6:
+			case 7:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ModelId", wireType)
 				}
@@ -706,12 +770,13 @@ type StakedGpuNode struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Owner        string `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
-	Stake        uint64 `protobuf:"varint,2,opt,name=stake,proto3" json:"stake,omitempty"`
-	Denom        string `protobuf:"bytes,3,opt,name=denom,proto3" json:"denom,omitempty"`
-	SuccessCount uint64 `protobuf:"varint,4,opt,name=successCount,proto3" json:"successCount,omitempty"`
-	FailCount    uint64 `protobuf:"varint,5,opt,name=failCount,proto3" json:"failCount,omitempty"`
-	ModelId      uint64 `protobuf:"varint,6,opt,name=modelId,proto3" json:"modelId,omitempty"`
+	Id           string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Owner        string `protobuf:"bytes,2,opt,name=owner,proto3" json:"owner,omitempty"`
+	Stake        uint64 `protobuf:"varint,3,opt,name=stake,proto3" json:"stake,omitempty"`
+	Denom        string `protobuf:"bytes,4,opt,name=denom,proto3" json:"denom,omitempty"`
+	SuccessCount uint64 `protobuf:"varint,5,opt,name=successCount,proto3" json:"successCount,omitempty"`
+	FailCount    uint64 `protobuf:"varint,6,opt,name=failCount,proto3" json:"failCount,omitempty"`
+	ModelId      uint64 `protobuf:"varint,7,opt,name=modelId,proto3" json:"modelId,omitempty"`
 }
 
 func (x *StakedGpuNode) Reset() {
@@ -732,6 +797,13 @@ func (*StakedGpuNode) ProtoMessage() {}
 // Deprecated: Use StakedGpuNode.ProtoReflect.Descriptor instead.
 func (*StakedGpuNode) Descriptor() ([]byte, []int) {
 	return file_cosmosllm_inference_staked_gpu_node_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *StakedGpuNode) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 func (x *StakedGpuNode) GetOwner() string {
@@ -783,17 +855,18 @@ var file_cosmosllm_inference_staked_gpu_node_proto_rawDesc = []byte{
 	0x72, 0x65, 0x6e, 0x63, 0x65, 0x2f, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x64, 0x5f, 0x67, 0x70, 0x75,
 	0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x13, 0x63, 0x6f, 0x73,
 	0x6d, 0x6f, 0x73, 0x6c, 0x6c, 0x6d, 0x2e, 0x69, 0x6e, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65,
-	0x22, 0xad, 0x01, 0x0a, 0x0d, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x64, 0x47, 0x70, 0x75, 0x4e, 0x6f,
-	0x64, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x22, 0xbd, 0x01, 0x0a, 0x0d, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x64, 0x47, 0x70, 0x75, 0x4e, 0x6f,
+	0x64, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
+	0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x6b,
-	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x12, 0x14,
-	0x0a, 0x05, 0x64, 0x65, 0x6e, 0x6f, 0x6d, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x64,
+	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x12, 0x14,
+	0x0a, 0x05, 0x64, 0x65, 0x6e, 0x6f, 0x6d, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x64,
 	0x65, 0x6e, 0x6f, 0x6d, 0x12, 0x22, 0x0a, 0x0c, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x43,
-	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0c, 0x73, 0x75, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0c, 0x73, 0x75, 0x63, 0x63,
 	0x65, 0x73, 0x73, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x66, 0x61, 0x69, 0x6c,
-	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x66, 0x61, 0x69,
+	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x66, 0x61, 0x69,
 	0x6c, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x49,
-	0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x49, 0x64,
+	0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x49, 0x64,
 	0x42, 0xc0, 0x01, 0x0a, 0x17, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x6c,
 	0x6c, 0x6d, 0x2e, 0x69, 0x6e, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x42, 0x12, 0x53, 0x74,
 	0x61, 0x6b, 0x65, 0x64, 0x47, 0x70, 0x75, 0x4e, 0x6f, 0x64, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f,

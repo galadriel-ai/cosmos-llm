@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName = "/cosmosllm.inference.Msg/UpdateParams"
-	Msg_RunInference_FullMethodName = "/cosmosllm.inference.Msg/RunInference"
+	Msg_UpdateParams_FullMethodName      = "/cosmosllm.inference.Msg/UpdateParams"
+	Msg_RunInference_FullMethodName      = "/cosmosllm.inference.Msg/RunInference"
+	Msg_JoinInferencePool_FullMethodName = "/cosmosllm.inference.Msg/JoinInferencePool"
 )
 
 // MsgClient is the client API for Msg service.
@@ -31,6 +32,7 @@ type MsgClient interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	RunInference(ctx context.Context, in *MsgRunInference, opts ...grpc.CallOption) (*MsgRunInferenceResponse, error)
+	JoinInferencePool(ctx context.Context, in *MsgJoinInferencePool, opts ...grpc.CallOption) (*MsgJoinInferencePoolResponse, error)
 }
 
 type msgClient struct {
@@ -59,6 +61,15 @@ func (c *msgClient) RunInference(ctx context.Context, in *MsgRunInference, opts 
 	return out, nil
 }
 
+func (c *msgClient) JoinInferencePool(ctx context.Context, in *MsgJoinInferencePool, opts ...grpc.CallOption) (*MsgJoinInferencePoolResponse, error) {
+	out := new(MsgJoinInferencePoolResponse)
+	err := c.cc.Invoke(ctx, Msg_JoinInferencePool_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -67,6 +78,7 @@ type MsgServer interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	RunInference(context.Context, *MsgRunInference) (*MsgRunInferenceResponse, error)
+	JoinInferencePool(context.Context, *MsgJoinInferencePool) (*MsgJoinInferencePoolResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -79,6 +91,9 @@ func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*
 }
 func (UnimplementedMsgServer) RunInference(context.Context, *MsgRunInference) (*MsgRunInferenceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RunInference not implemented")
+}
+func (UnimplementedMsgServer) JoinInferencePool(context.Context, *MsgJoinInferencePool) (*MsgJoinInferencePoolResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JoinInferencePool not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -129,6 +144,24 @@ func _Msg_RunInference_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_JoinInferencePool_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgJoinInferencePool)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).JoinInferencePool(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_JoinInferencePool_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).JoinInferencePool(ctx, req.(*MsgJoinInferencePool))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -143,6 +176,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RunInference",
 			Handler:    _Msg_RunInference_Handler,
+		},
+		{
+			MethodName: "JoinInferencePool",
+			Handler:    _Msg_JoinInferencePool_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -4,11 +4,12 @@ package cosmosllm.inference;
 option go_package = "cosmos-llm/x/inference/types";
 
 message StakedGpuNode {
-  
-  string owner = 1; 
-  uint64 stake = 2; 
-  string denom = 3; 
-  uint64 successCount = 4; 
-  uint64 failCount = 5; 
-  uint64 modelId = 6;
+
+  string id = 1;
+  string owner = 2;
+  uint64 stake = 3;
+  string denom = 4;
+  uint64 successCount = 5;
+  uint64 failCount = 6;
+  uint64 modelId = 7;
 }

@@ -41,6 +41,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a runInference tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "prompt"}, {ProtoField: "modelid"}},
 				},
+				{
+					RpcMethod:      "JoinInferencePool",
+					Use:            "join-inference-pool [model-id]",
+					Short:          "Send a joinInferencePool tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "modelId"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

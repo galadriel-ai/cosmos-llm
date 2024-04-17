@@ -12,6 +12,8 @@ const (
 
 	InferenceKey      = "Inference/value/"
 	InferenceCountKey = "Inference/count/"
+
+	GpuNodeKey = "GpuNode/value/"
 )
 
 var (

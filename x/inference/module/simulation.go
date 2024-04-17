@@ -27,6 +27,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgRunInference int = 100
 
+	opWeightMsgJoinInferencePool = "op_weight_msg_join_inference_pool"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgJoinInferencePool int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -66,6 +70,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		inferencesimulation.SimulateMsgRunInference(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgJoinInferencePool int
+	simState.AppParams.GetOrGenerate(opWeightMsgJoinInferencePool, &weightMsgJoinInferencePool, nil,
+		func(_ *rand.Rand) {
+			weightMsgJoinInferencePool = defaultWeightMsgJoinInferencePool
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgJoinInferencePool,
+		inferencesimulation.SimulateMsgJoinInferencePool(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -79,6 +94,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgRunInference,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				inferencesimulation.SimulateMsgRunInference(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgJoinInferencePool,
+			defaultWeightMsgJoinInferencePool,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				inferencesimulation.SimulateMsgJoinInferencePool(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
