@@ -2,7 +2,6 @@ package keeper
 
 import (
 	"context"
-
 	"cosmos-llm/x/inference/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -23,6 +22,8 @@ func (k msgServer) RunInference(goCtx context.Context, msg *types.MsgRunInferenc
 		ctx,
 		question,
 	)
+	// Need ante handler for this..
+	//ctx.GasMeter().ConsumeGas(types.RunInferenceGas, "Run inference")
 	return &types.MsgRunInferenceResponse{
 		Id: id,
 	}, nil
