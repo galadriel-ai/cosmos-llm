@@ -19,9 +19,7 @@ var (
 	fd_StakedGpuNode_denom        protoreflect.FieldDescriptor
 	fd_StakedGpuNode_successCount protoreflect.FieldDescriptor
 	fd_StakedGpuNode_failCount    protoreflect.FieldDescriptor
-	fd_StakedGpuNode_gpuModel     protoreflect.FieldDescriptor
-	fd_StakedGpuNode_memory       protoreflect.FieldDescriptor
-	fd_StakedGpuNode_cores        protoreflect.FieldDescriptor
+	fd_StakedGpuNode_modelId      protoreflect.FieldDescriptor
 )
 
 func init() {
@@ -32,9 +30,7 @@ func init() {
 	fd_StakedGpuNode_denom = md_StakedGpuNode.Fields().ByName("denom")
 	fd_StakedGpuNode_successCount = md_StakedGpuNode.Fields().ByName("successCount")
 	fd_StakedGpuNode_failCount = md_StakedGpuNode.Fields().ByName("failCount")
-	fd_StakedGpuNode_gpuModel = md_StakedGpuNode.Fields().ByName("gpuModel")
-	fd_StakedGpuNode_memory = md_StakedGpuNode.Fields().ByName("memory")
-	fd_StakedGpuNode_cores = md_StakedGpuNode.Fields().ByName("cores")
+	fd_StakedGpuNode_modelId = md_StakedGpuNode.Fields().ByName("modelId")
 }
 
 var _ protoreflect.Message = (*fastReflection_StakedGpuNode)(nil)
@@ -132,21 +128,9 @@ func (x *fastReflection_StakedGpuNode) Range(f func(protoreflect.FieldDescriptor
 			return
 		}
 	}
-	if x.GpuModel != "" {
-		value := protoreflect.ValueOfString(x.GpuModel)
-		if !f(fd_StakedGpuNode_gpuModel, value) {
-			return
-		}
-	}
-	if x.Memory != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.Memory)
-		if !f(fd_StakedGpuNode_memory, value) {
-			return
-		}
-	}
-	if x.Cores != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.Cores)
-		if !f(fd_StakedGpuNode_cores, value) {
+	if x.ModelId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ModelId)
+		if !f(fd_StakedGpuNode_modelId, value) {
 			return
 		}
 	}
@@ -175,12 +159,8 @@ func (x *fastReflection_StakedGpuNode) Has(fd protoreflect.FieldDescriptor) bool
 		return x.SuccessCount != uint64(0)
 	case "cosmosllm.inference.StakedGpuNode.failCount":
 		return x.FailCount != uint64(0)
-	case "cosmosllm.inference.StakedGpuNode.gpuModel":
-		return x.GpuModel != ""
-	case "cosmosllm.inference.StakedGpuNode.memory":
-		return x.Memory != uint64(0)
-	case "cosmosllm.inference.StakedGpuNode.cores":
-		return x.Cores != uint64(0)
+	case "cosmosllm.inference.StakedGpuNode.modelId":
+		return x.ModelId != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosllm.inference.StakedGpuNode"))
@@ -207,12 +187,8 @@ func (x *fastReflection_StakedGpuNode) Clear(fd protoreflect.FieldDescriptor) {
 		x.SuccessCount = uint64(0)
 	case "cosmosllm.inference.StakedGpuNode.failCount":
 		x.FailCount = uint64(0)
-	case "cosmosllm.inference.StakedGpuNode.gpuModel":
-		x.GpuModel = ""
-	case "cosmosllm.inference.StakedGpuNode.memory":
-		x.Memory = uint64(0)
-	case "cosmosllm.inference.StakedGpuNode.cores":
-		x.Cores = uint64(0)
+	case "cosmosllm.inference.StakedGpuNode.modelId":
+		x.ModelId = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosllm.inference.StakedGpuNode"))
@@ -244,14 +220,8 @@ func (x *fastReflection_StakedGpuNode) Get(descriptor protoreflect.FieldDescript
 	case "cosmosllm.inference.StakedGpuNode.failCount":
 		value := x.FailCount
 		return protoreflect.ValueOfUint64(value)
-	case "cosmosllm.inference.StakedGpuNode.gpuModel":
-		value := x.GpuModel
-		return protoreflect.ValueOfString(value)
-	case "cosmosllm.inference.StakedGpuNode.memory":
-		value := x.Memory
-		return protoreflect.ValueOfUint64(value)
-	case "cosmosllm.inference.StakedGpuNode.cores":
-		value := x.Cores
+	case "cosmosllm.inference.StakedGpuNode.modelId":
+		value := x.ModelId
 		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
@@ -283,12 +253,8 @@ func (x *fastReflection_StakedGpuNode) Set(fd protoreflect.FieldDescriptor, valu
 		x.SuccessCount = value.Uint()
 	case "cosmosllm.inference.StakedGpuNode.failCount":
 		x.FailCount = value.Uint()
-	case "cosmosllm.inference.StakedGpuNode.gpuModel":
-		x.GpuModel = value.Interface().(string)
-	case "cosmosllm.inference.StakedGpuNode.memory":
-		x.Memory = value.Uint()
-	case "cosmosllm.inference.StakedGpuNode.cores":
-		x.Cores = value.Uint()
+	case "cosmosllm.inference.StakedGpuNode.modelId":
+		x.ModelId = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosllm.inference.StakedGpuNode"))
@@ -319,12 +285,8 @@ func (x *fastReflection_StakedGpuNode) Mutable(fd protoreflect.FieldDescriptor) 
 		panic(fmt.Errorf("field successCount of message cosmosllm.inference.StakedGpuNode is not mutable"))
 	case "cosmosllm.inference.StakedGpuNode.failCount":
 		panic(fmt.Errorf("field failCount of message cosmosllm.inference.StakedGpuNode is not mutable"))
-	case "cosmosllm.inference.StakedGpuNode.gpuModel":
-		panic(fmt.Errorf("field gpuModel of message cosmosllm.inference.StakedGpuNode is not mutable"))
-	case "cosmosllm.inference.StakedGpuNode.memory":
-		panic(fmt.Errorf("field memory of message cosmosllm.inference.StakedGpuNode is not mutable"))
-	case "cosmosllm.inference.StakedGpuNode.cores":
-		panic(fmt.Errorf("field cores of message cosmosllm.inference.StakedGpuNode is not mutable"))
+	case "cosmosllm.inference.StakedGpuNode.modelId":
+		panic(fmt.Errorf("field modelId of message cosmosllm.inference.StakedGpuNode is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosllm.inference.StakedGpuNode"))
@@ -348,11 +310,7 @@ func (x *fastReflection_StakedGpuNode) NewField(fd protoreflect.FieldDescriptor)
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "cosmosllm.inference.StakedGpuNode.failCount":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "cosmosllm.inference.StakedGpuNode.gpuModel":
-		return protoreflect.ValueOfString("")
-	case "cosmosllm.inference.StakedGpuNode.memory":
-		return protoreflect.ValueOfUint64(uint64(0))
-	case "cosmosllm.inference.StakedGpuNode.cores":
+	case "cosmosllm.inference.StakedGpuNode.modelId":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
@@ -440,15 +398,8 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 		if x.FailCount != 0 {
 			n += 1 + runtime.Sov(uint64(x.FailCount))
 		}
-		l = len(x.GpuModel)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		if x.Memory != 0 {
-			n += 1 + runtime.Sov(uint64(x.Memory))
-		}
-		if x.Cores != 0 {
-			n += 1 + runtime.Sov(uint64(x.Cores))
+		if x.ModelId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ModelId))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -479,22 +430,10 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.Cores != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.Cores))
+		if x.ModelId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ModelId))
 			i--
-			dAtA[i] = 0x40
-		}
-		if x.Memory != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.Memory))
-			i--
-			dAtA[i] = 0x38
-		}
-		if len(x.GpuModel) > 0 {
-			i -= len(x.GpuModel)
-			copy(dAtA[i:], x.GpuModel)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.GpuModel)))
-			i--
-			dAtA[i] = 0x32
+			dAtA[i] = 0x30
 		}
 		if x.FailCount != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.FailCount))
@@ -696,42 +635,10 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 					}
 				}
 			case 6:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GpuModel", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.GpuModel = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 7:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Memory", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ModelId", wireType)
 				}
-				x.Memory = 0
+				x.ModelId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -741,26 +648,7 @@ func (x *fastReflection_StakedGpuNode) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.Memory |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-			case 8:
-				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Cores", wireType)
-				}
-				x.Cores = 0
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					x.Cores |= uint64(b&0x7F) << shift
+					x.ModelId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -823,9 +711,7 @@ type StakedGpuNode struct {
 	Denom        string `protobuf:"bytes,3,opt,name=denom,proto3" json:"denom,omitempty"`
 	SuccessCount uint64 `protobuf:"varint,4,opt,name=successCount,proto3" json:"successCount,omitempty"`
 	FailCount    uint64 `protobuf:"varint,5,opt,name=failCount,proto3" json:"failCount,omitempty"`
-	GpuModel     string `protobuf:"bytes,6,opt,name=gpuModel,proto3" json:"gpuModel,omitempty"`
-	Memory       uint64 `protobuf:"varint,7,opt,name=memory,proto3" json:"memory,omitempty"`
-	Cores        uint64 `protobuf:"varint,8,opt,name=cores,proto3" json:"cores,omitempty"`
+	ModelId      uint64 `protobuf:"varint,6,opt,name=modelId,proto3" json:"modelId,omitempty"`
 }
 
 func (x *StakedGpuNode) Reset() {
@@ -883,23 +769,9 @@ func (x *StakedGpuNode) GetFailCount() uint64 {
 	return 0
 }
 
-func (x *StakedGpuNode) GetGpuModel() string {
+func (x *StakedGpuNode) GetModelId() uint64 {
 	if x != nil {
-		return x.GpuModel
-	}
-	return ""
-}
-
-func (x *StakedGpuNode) GetMemory() uint64 {
-	if x != nil {
-		return x.Memory
-	}
-	return 0
-}
-
-func (x *StakedGpuNode) GetCores() uint64 {
-	if x != nil {
-		return x.Cores
+		return x.ModelId
 	}
 	return 0
 }
@@ -911,7 +783,7 @@ var file_cosmosllm_inference_staked_gpu_node_proto_rawDesc = []byte{
 	0x72, 0x65, 0x6e, 0x63, 0x65, 0x2f, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x64, 0x5f, 0x67, 0x70, 0x75,
 	0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x13, 0x63, 0x6f, 0x73,
 	0x6d, 0x6f, 0x73, 0x6c, 0x6c, 0x6d, 0x2e, 0x69, 0x6e, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65,
-	0x22, 0xdd, 0x01, 0x0a, 0x0d, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x64, 0x47, 0x70, 0x75, 0x4e, 0x6f,
+	0x22, 0xad, 0x01, 0x0a, 0x0d, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x64, 0x47, 0x70, 0x75, 0x4e, 0x6f,
 	0x64, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x6b,
 	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x12, 0x14,
@@ -920,11 +792,8 @@ var file_cosmosllm_inference_staked_gpu_node_proto_rawDesc = []byte{
 	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0c, 0x73, 0x75, 0x63, 0x63,
 	0x65, 0x73, 0x73, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x66, 0x61, 0x69, 0x6c,
 	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x66, 0x61, 0x69,
-	0x6c, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x67, 0x70, 0x75, 0x4d, 0x6f, 0x64,
-	0x65, 0x6c, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x67, 0x70, 0x75, 0x4d, 0x6f, 0x64,
-	0x65, 0x6c, 0x12, 0x16, 0x0a, 0x06, 0x6d, 0x65, 0x6d, 0x6f, 0x72, 0x79, 0x18, 0x07, 0x20, 0x01,
-	0x28, 0x04, 0x52, 0x06, 0x6d, 0x65, 0x6d, 0x6f, 0x72, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f,
-	0x72, 0x65, 0x73, 0x18, 0x08, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x63, 0x6f, 0x72, 0x65, 0x73,
+	0x6c, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x49,
+	0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x49, 0x64,
 	0x42, 0xc0, 0x01, 0x0a, 0x17, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x6c,
 	0x6c, 0x6d, 0x2e, 0x69, 0x6e, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x42, 0x12, 0x53, 0x74,
 	0x61, 0x6b, 0x65, 0x64, 0x47, 0x70, 0x75, 0x4e, 0x6f, 0x64, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f,

@@ -10,7 +10,5 @@ message StakedGpuNode {
   string denom = 3; 
   uint64 successCount = 4; 
   uint64 failCount = 5; 
-  string gpuModel = 6; 
-  uint64 memory = 7; 
-  uint64 cores = 8; 
+  uint64 modelId = 6;
 }
