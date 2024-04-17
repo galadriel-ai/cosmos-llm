@@ -9004,93 +9004,6 @@ paths:
               Since: cosmos-sdk 0.47
       tags:
         - Msg
-  /cosmos-llm/inference/get_inference_run/{id}:
-    get:
-      summary: Queries a list of GetInferenceRun items.
-      operationId: CosmosllmInferenceQuery_GetInferenceRun
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              inference:
-                type: object
-                properties:
-                  modelId:
-                    type: string
-                    format: uint64
-                  prompt:
-                    type: string
-                  response:
-                    type: string
-                  isfinished:
-                    type: boolean
-                  id:
-                    type: string
-                    format: uint64
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
-          format: uint64
-      tags:
-        - Query
-  /cosmos-llm/inference/params:
-    get:
-      summary: Parameters queries the parameters of the module.
-      operationId: CosmosllmInferenceQuery_Params
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              params:
-                description: params holds all the parameters of this module.
-                type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
   /cosmosllm.inference.Msg/RunInference:
     post:
       operationId: CosmosllmInferenceMsg_RunInference
@@ -9190,6 +9103,93 @@ paths:
             description: MsgUpdateParams is the Msg/UpdateParams request type.
       tags:
         - Msg
+  /cosmos-llm/inference/get_inference_run/{id}:
+    get:
+      summary: Queries a list of GetInferenceRun items.
+      operationId: CosmosllmInferenceQuery_GetInferenceRun
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              inference:
+                type: object
+                properties:
+                  modelId:
+                    type: string
+                    format: uint64
+                  prompt:
+                    type: string
+                  response:
+                    type: string
+                  isfinished:
+                    type: boolean
+                  id:
+                    type: string
+                    format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+      tags:
+        - Query
+  /cosmos-llm/inference/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: CosmosllmInferenceQuery_Params
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /ibc.applications.fee.v1.Msg/PayPacketFee:
     post:
       summary: >-
@@ -22762,49 +22762,6 @@ definitions:
           min_commission_rate is the chain-wide minimum commission rate that a
           validator can charge their delegators
     description: Params defines the parameters for the x/staking module.
-  cosmosllm.inference.Inferencerun:
-    type: object
-    properties:
-      modelId:
-        type: string
-        format: uint64
-      prompt:
-        type: string
-      response:
-        type: string
-      isfinished:
-        type: boolean
-      id:
-        type: string
-        format: uint64
-  cosmosllm.inference.Params:
-    type: object
-    description: Params defines the parameters for the module.
-  cosmosllm.inference.QueryGetInferenceRunResponse:
-    type: object
-    properties:
-      inference:
-        type: object
-        properties:
-          modelId:
-            type: string
-            format: uint64
-          prompt:
-            type: string
-          response:
-            type: string
-          isfinished:
-            type: boolean
-          id:
-            type: string
-            format: uint64
-  cosmosllm.inference.QueryParamsResponse:
-    type: object
-    properties:
-      params:
-        description: params holds all the parameters of this module.
-        type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   cosmosllm.inference.MsgRunInference:
     type: object
     properties:
@@ -22838,6 +22795,49 @@ definitions:
     description: |-
       MsgUpdateParamsResponse defines the response structure for executing a
       MsgUpdateParams message.
+  cosmosllm.inference.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  cosmosllm.inference.Inferencerun:
+    type: object
+    properties:
+      modelId:
+        type: string
+        format: uint64
+      prompt:
+        type: string
+      response:
+        type: string
+      isfinished:
+        type: boolean
+      id:
+        type: string
+        format: uint64
+  cosmosllm.inference.QueryGetInferenceRunResponse:
+    type: object
+    properties:
+      inference:
+        type: object
+        properties:
+          modelId:
+            type: string
+            format: uint64
+          prompt:
+            type: string
+          response:
+            type: string
+          isfinished:
+            type: boolean
+          id:
+            type: string
+            format: uint64
+  cosmosllm.inference.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
   ibc.applications.fee.v1.Fee:
     type: object
     properties:
