@@ -24,6 +24,7 @@ func (k Keeper) GetInferenceRun(goCtx context.Context, req *types.QueryGetInfere
 	formattedRun := types.Inferencerun{
 		Id:         run.Id,
 		Prompt:     run.Prompt,
+		ModelId:    run.ModelId,
 		Response:   run.Response,
 		Isfinished: run.Isfinished,
 	}
