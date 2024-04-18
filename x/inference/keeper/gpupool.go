@@ -18,7 +18,8 @@ func (k Keeper) AddGpuNode(ctx sdk.Context, run types.StakedGpuNode) string {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.GpuNodeKey))
 	b := k.cdc.MustMarshal(&run)
-	store.Set([]byte(runID), b)
+	key := append(types.KeyPrefix(types.GpuNodeKey), []byte(runID)...)
+	store.Set(key, b)
 
 	fmt.Printf("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
 	fmt.Printf("MODEL ID: %d\n", run.ModelId)
@@ -31,18 +32,18 @@ func (k Keeper) DeleteGpuNode(ctx sdk.Context, id string) {
 	store.Delete([]byte(id))
 }
 
-func (k Keeper) ListAllGpuNodes(ctx sdk.Context) []types.Inferencerun {
+func (k Keeper) ListAllGpuNodes(ctx sdk.Context) []types.StakedGpuNode {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.GpuNodeKey))
-	iterator := types2.KVStorePrefixIterator(store, []byte{})
+	iterator := types2.KVStorePrefixIterator(store, types.KeyPrefix(types.GpuNodeKey))
+	defer iterator.Close()
 
-	var runs []types.Inferencerun
+	var runs []types.StakedGpuNode
 	for ; iterator.Valid(); iterator.Next() {
 		fmt.Printf("Key: %x, Data: %x\n", iterator.Key(), iterator.Value())
-		var run types.Inferencerun
+		var run types.StakedGpuNode
 		k.cdc.MustUnmarshal(iterator.Value(), &run)
 		runs = append(runs, run)
 	}
-	defer iterator.Close()
 	return runs
 }

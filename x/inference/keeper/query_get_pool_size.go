@@ -24,7 +24,6 @@ func (k Keeper) GetPoolSize(goCtx context.Context, req *types.QueryGetPoolSizeRe
 	fmt.Printf("NODES COUNT: %d\n", len(nodes))
 
 	return &types.QueryGetPoolSizeResponse{
-		//Size_: uint64(len(nodes)),
-		Size_: uint64(1),
+		Size_: uint64(len(nodes)),
 	}, nil
 }

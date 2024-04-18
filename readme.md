@@ -13,6 +13,45 @@ ignite chain serve
 
 Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
 
+
+## Useful commands
+
+```
+# Make inference request
+cosmos-llmd tx inference run-inference "hello3" 1 --from bob --chain-id cosmosllm --fees 5000stake
+# Get inference request
+cosmos-llmd q inference get-inference-run 0 --chain-id cosmosllm
+
+# Join "gpu" pool
+cosmos-llmd tx inference join-inference-pool 1 --from bob  --chain-id cosmosllm --fees 5000stake
+# Get pool size
+cosmos-llmd q inference get-pool-size --chain-id cosmosllm
+```
+
+Get acc balance
+```
+curl \
+    -X GET \
+    -H "Content-Type: application/json" \
+    http://localhost:1317/cosmos/bank/v1beta1/balances/cosmos123usjcjpx0u2nwwtyuy2j9qmnp544hwcyjasay
+```
+
+**scaffolding commands**
+```
+# Write endpoint
+ignite scaffold message runInference prompt modelid:uint --response id:uint --module inference
+
+# query endpoint
+ignite scaffold query get-inference-run id:uint --response inference:Inferencerun --module inference
+
+# Data type
+ignite scaffold type inferencerun modelId:uint prompt:string isfinished:bool id:uint --module inference
+
+# Regenerate boilerplate for some type after changing .proto file(s)
+ignite generate proto-go
+```
+
+
 ### Web Frontend
 
 Additionally, Ignite CLI offers both Vue and React options for frontend scaffolding:
