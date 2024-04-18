@@ -13,6 +13,8 @@ const (
 	InferenceKey      = "Inference/value/"
 	InferenceCountKey = "Inference/count/"
 
+	InferenceResponseKey = "InferenceResponse/value/"
+
 	GpuNodeKey = "GpuNode/value/"
 )
 

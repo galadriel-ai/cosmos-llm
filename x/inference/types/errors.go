@@ -14,4 +14,6 @@ var (
 	ErrInvalidAddress    = sdkerrors.Register(ModuleName, 1103, "msg creator address invalid: %s")
 	ErrFailedToPay       = sdkerrors.Register(ModuleName, 1104, "failed to make payment with account address: %s")
 	ErrAlreadyRegistered = sdkerrors.Register(ModuleName, 1105, "model id already registered with given account")
+	ErrAlreadyResponded  = sdkerrors.Register(ModuleName, 1106, "run id already responded to with given account")
+	ErrRunNotFound       = sdkerrors.Register(ModuleName, 1107, "run id for inference responses not found")
 )

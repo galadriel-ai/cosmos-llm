@@ -1,0 +1,12 @@
+syntax = "proto3";
+package cosmosllm.inference;
+
+option go_package = "cosmos-llm/x/inference/types";
+
+message InferencerunResponse {
+  
+  uint64 runId = 1; 
+  repeated string responses = 2; 
+  repeated string responders = 3; 
+  bool isfinished = 4; 
+}

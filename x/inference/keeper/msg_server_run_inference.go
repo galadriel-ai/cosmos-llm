@@ -22,6 +22,7 @@ func (k msgServer) RunInference(goCtx context.Context, msg *types.MsgRunInferenc
 		ctx,
 		question,
 	)
+	k.InsertInferenceRunResponse(ctx, id)
 	// Need ante handler for this..
 	//ctx.GasMeter().ConsumeGas(types.RunInferenceGas, "Run inference")
 	return &types.MsgRunInferenceResponse{
