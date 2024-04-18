@@ -60,6 +60,7 @@ func (k Keeper) Logger() log.Logger {
 
 var models = map[uint64]string{
 	1: "gpt-4.5-turbo",
+	2: "mixtral-8x7b-32768",
 }
 
 func GetModelById(key uint64) (string, bool) {

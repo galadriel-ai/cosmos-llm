@@ -7,6 +7,7 @@ import (
 	inference "cosmos-llm/x/inference/module"
 	"cosmos-llm/x/inference/testutil"
 	"cosmos-llm/x/inference/types"
+	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
@@ -60,11 +61,27 @@ func TestJoinPoolInvalidModelId(t *testing.T) {
 
 func TestJoinPoolTakesStake(t *testing.T) {
 	msgServer, _, ctx, _, bank := setupMsgServerJoinPoolWithMock(t)
-	bank.ExpectPayWithDenom(ctx, alice, 1, "token").Times(1)
+	bank.ExpectPayWithDenom(ctx, alice, keeper.StakeAmount, keeper.StakeDenom).Times(1)
 
 	_, err := msgServer.JoinInferencePool(ctx, &types.MsgJoinInferencePool{
 		Creator: alice,
 		ModelId: 1,
 	})
 	require.Nil(t, err)
+}
+
+func TestJoinPoolTwiceErr(t *testing.T) {
+	msgServer, _, ctx, _ := setupMsgServerCreateDependencies(t)
+	msgServer.JoinInferencePool(ctx, &types.MsgJoinInferencePool{
+		Creator: alice,
+		ModelId: 1,
+	})
+	joinResponse, err := msgServer.JoinInferencePool(ctx, &types.MsgJoinInferencePool{
+		Creator: alice,
+		ModelId: 1,
+	})
+	require.Nil(t, joinResponse)
+	require.Equal(t,
+		fmt.Sprintf("%s 1: model id already registered with given account", alice),
+		err.Error())
 }

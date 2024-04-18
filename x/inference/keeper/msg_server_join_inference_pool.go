@@ -8,6 +8,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
+const StakeAmount = 1000
+const StakeDenom = "token"
+
 func (k msgServer) JoinInferencePool(goCtx context.Context, msg *types.MsgJoinInferencePool) (*types.MsgJoinInferencePoolResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -23,18 +26,23 @@ func (k msgServer) JoinInferencePool(goCtx context.Context, msg *types.MsgJoinIn
 	}
 
 	// Coin denomination
-	denom := "token"
-	// Amount = 1stake
-	coins := sdk.NewCoin(denom, math.NewInt(1))
+	coins := sdk.NewCoin(StakeDenom, math.NewInt(StakeAmount))
 	err = k.bankKeeper.SendCoinsFromAccountToModule(ctx, address, types.ModuleName, sdk.NewCoins(coins))
 	if err != nil {
 		return nil, sdkerrors.Wrapf(types.ErrFailedToPay, "%s", msg.Creator)
 	}
 
+	nodes := k.ListAllGpuNodes(ctx)
+	for _, element := range nodes {
+		if element.Owner == msg.Creator && element.ModelId == msg.ModelId {
+			return nil, sdkerrors.Wrapf(types.ErrAlreadyRegistered, "%s %d", msg.Creator, msg.ModelId)
+		}
+	}
+
 	var staked = types.StakedGpuNode{
 		Owner:        msg.Creator,
 		Stake:        1,
-		Denom:        denom,
+		Denom:        StakeDenom,
 		SuccessCount: 0,
 		FailCount:    0,
 		ModelId:      msg.ModelId,
