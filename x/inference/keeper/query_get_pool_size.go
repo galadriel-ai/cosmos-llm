@@ -14,13 +14,9 @@ func (k Keeper) GetPoolSize(goCtx context.Context, req *types.QueryGetPoolSizeRe
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
-
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	//_ = ctx
-	fmt.Printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n")
 	nodes := k.ListAllGpuNodes(ctx)
-	fmt.Printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n")
 	fmt.Printf("NODES COUNT: %d\n", len(nodes))
 
 	return &types.QueryGetPoolSizeResponse{

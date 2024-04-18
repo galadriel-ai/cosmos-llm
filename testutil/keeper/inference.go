@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"cosmos-llm/x/inference/testutil"
 	"testing"
 
 	"cosmossdk.io/log"
@@ -22,6 +23,10 @@ import (
 )
 
 func InferenceKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {
+	return InferenceKeeperWithMocks(t, nil)
+}
+
+func InferenceKeeperWithMocks(t testing.TB, bank *testutil.MockBankKeeper) (keeper.Keeper, sdk.Context) {
 	storeKey := storetypes.NewKVStoreKey(types.StoreKey)
 
 	db := dbm.NewMemDB()
@@ -38,6 +43,7 @@ func InferenceKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {
 		runtime.NewKVStoreService(storeKey),
 		log.NewNopLogger(),
 		authority.String(),
+		bank,
 	)
 
 	ctx := sdk.NewContext(stateStore, cmtproto.Header{}, false, log.NewNopLogger())

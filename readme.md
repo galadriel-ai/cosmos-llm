@@ -33,7 +33,7 @@ Get acc balance
 curl \
     -X GET \
     -H "Content-Type: application/json" \
-    http://localhost:1317/cosmos/bank/v1beta1/balances/cosmos123usjcjpx0u2nwwtyuy2j9qmnp544hwcyjasay
+    http://localhost:1317/cosmos/bank/v1beta1/balances/cosmos1xt2c7xnce4p3npvpewvkt4j50mnzu3lz8duuas
 ```
 
 **scaffolding commands**
@@ -51,6 +51,21 @@ ignite scaffold type inferencerun modelId:uint prompt:string isfinished:bool id:
 ignite generate proto-go
 ```
 
+## Testing
+```
+go install go.uber.org/mock/mockgen@latest
+```
+
+**Generate mocks**
+```
+mockgen -source=x/inference/types/expected_keepers.go \
+                -package testutil \
+                -destination=x/inference/testutil/expected_keepers_mocks.go
+```
+**Run some tests**
+```
+go test -v ./x/inference/keeper
+```
 
 ### Web Frontend
 

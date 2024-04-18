@@ -5,7 +5,6 @@ import (
 	"cosmos-llm/x/inference/types"
 	sdkerrors "cosmossdk.io/errors"
 	"cosmossdk.io/math"
-	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
@@ -24,7 +23,7 @@ func (k msgServer) JoinInferencePool(goCtx context.Context, msg *types.MsgJoinIn
 	}
 
 	// Coin denomination
-	denom := "stake"
+	denom := "token"
 	// Amount = 1stake
 	coins := sdk.NewCoin(denom, math.NewInt(1))
 	err = k.bankKeeper.SendCoinsFromAccountToModule(ctx, address, types.ModuleName, sdk.NewCoins(coins))
@@ -41,8 +40,6 @@ func (k msgServer) JoinInferencePool(goCtx context.Context, msg *types.MsgJoinIn
 		ModelId:      msg.ModelId,
 	}
 	k.AddGpuNode(ctx, staked)
-	fmt.Printf("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n")
-	fmt.Printf("Added staked node with model id: %d\n", msg.ModelId)
 
 	return &types.MsgJoinInferencePoolResponse{}, nil
 }

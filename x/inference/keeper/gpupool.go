@@ -4,7 +4,6 @@ import (
 	"cosmos-llm/x/inference/types"
 	"cosmossdk.io/store/prefix"
 	types2 "cosmossdk.io/store/types"
-	"fmt"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/google/uuid"
@@ -21,8 +20,6 @@ func (k Keeper) AddGpuNode(ctx sdk.Context, run types.StakedGpuNode) string {
 	key := append(types.KeyPrefix(types.GpuNodeKey), []byte(runID)...)
 	store.Set(key, b)
 
-	fmt.Printf("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
-	fmt.Printf("MODEL ID: %d\n", run.ModelId)
 	return runID
 }
 
@@ -40,7 +37,6 @@ func (k Keeper) ListAllGpuNodes(ctx sdk.Context) []types.StakedGpuNode {
 
 	var runs []types.StakedGpuNode
 	for ; iterator.Valid(); iterator.Next() {
-		fmt.Printf("Key: %x, Data: %x\n", iterator.Key(), iterator.Value())
 		var run types.StakedGpuNode
 		k.cdc.MustUnmarshal(iterator.Value(), &run)
 		runs = append(runs, run)
