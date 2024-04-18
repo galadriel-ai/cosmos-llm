@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Params_FullMethodName          = "/cosmosllm.inference.Query/Params"
-	Query_GetInferenceRun_FullMethodName = "/cosmosllm.inference.Query/GetInferenceRun"
-	Query_GetPoolSize_FullMethodName     = "/cosmosllm.inference.Query/GetPoolSize"
+	Query_Params_FullMethodName                    = "/cosmosllm.inference.Query/Params"
+	Query_GetInferenceRun_FullMethodName           = "/cosmosllm.inference.Query/GetInferenceRun"
+	Query_GetPoolSize_FullMethodName               = "/cosmosllm.inference.Query/GetPoolSize"
+	Query_GetUnansweredInferenceRun_FullMethodName = "/cosmosllm.inference.Query/GetUnansweredInferenceRun"
 )
 
 // QueryClient is the client API for Query service.
@@ -34,6 +35,8 @@ type QueryClient interface {
 	GetInferenceRun(ctx context.Context, in *QueryGetInferenceRunRequest, opts ...grpc.CallOption) (*QueryGetInferenceRunResponse, error)
 	// Queries a list of GetPoolSize items.
 	GetPoolSize(ctx context.Context, in *QueryGetPoolSizeRequest, opts ...grpc.CallOption) (*QueryGetPoolSizeResponse, error)
+	// Queries a list of GetUnansweredInferenceRun items.
+	GetUnansweredInferenceRun(ctx context.Context, in *QueryGetUnansweredInferenceRunRequest, opts ...grpc.CallOption) (*QueryGetUnansweredInferenceRunResponse, error)
 }
 
 type queryClient struct {
@@ -71,6 +74,15 @@ func (c *queryClient) GetPoolSize(ctx context.Context, in *QueryGetPoolSizeReque
 	return out, nil
 }
 
+func (c *queryClient) GetUnansweredInferenceRun(ctx context.Context, in *QueryGetUnansweredInferenceRunRequest, opts ...grpc.CallOption) (*QueryGetUnansweredInferenceRunResponse, error) {
+	out := new(QueryGetUnansweredInferenceRunResponse)
+	err := c.cc.Invoke(ctx, Query_GetUnansweredInferenceRun_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -81,6 +93,8 @@ type QueryServer interface {
 	GetInferenceRun(context.Context, *QueryGetInferenceRunRequest) (*QueryGetInferenceRunResponse, error)
 	// Queries a list of GetPoolSize items.
 	GetPoolSize(context.Context, *QueryGetPoolSizeRequest) (*QueryGetPoolSizeResponse, error)
+	// Queries a list of GetUnansweredInferenceRun items.
+	GetUnansweredInferenceRun(context.Context, *QueryGetUnansweredInferenceRunRequest) (*QueryGetUnansweredInferenceRunResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -96,6 +110,9 @@ func (UnimplementedQueryServer) GetInferenceRun(context.Context, *QueryGetInfere
 }
 func (UnimplementedQueryServer) GetPoolSize(context.Context, *QueryGetPoolSizeRequest) (*QueryGetPoolSizeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPoolSize not implemented")
+}
+func (UnimplementedQueryServer) GetUnansweredInferenceRun(context.Context, *QueryGetUnansweredInferenceRunRequest) (*QueryGetUnansweredInferenceRunResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUnansweredInferenceRun not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -164,6 +181,24 @@ func _Query_GetPoolSize_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_GetUnansweredInferenceRun_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetUnansweredInferenceRunRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).GetUnansweredInferenceRun(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_GetUnansweredInferenceRun_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).GetUnansweredInferenceRun(ctx, req.(*QueryGetUnansweredInferenceRunRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -182,6 +217,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPoolSize",
 			Handler:    _Query_GetPoolSize_Handler,
+		},
+		{
+			MethodName: "GetUnansweredInferenceRun",
+			Handler:    _Query_GetUnansweredInferenceRun_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

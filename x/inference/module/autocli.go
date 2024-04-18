@@ -31,6 +31,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
+				{
+					RpcMethod:      "GetUnansweredInferenceRun",
+					Use:            "get-unanswered-inference-run [model-id]",
+					Short:          "Query get-unanswered-inference-run",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "modelId"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

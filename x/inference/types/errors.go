@@ -16,4 +16,5 @@ var (
 	ErrAlreadyRegistered = sdkerrors.Register(ModuleName, 1105, "model id already registered with given account")
 	ErrAlreadyResponded  = sdkerrors.Register(ModuleName, 1106, "run id already responded to with given account")
 	ErrRunNotFound       = sdkerrors.Register(ModuleName, 1107, "run id for inference responses not found")
+	ErrNoUnansweredRuns  = sdkerrors.Register(ModuleName, 1108, "model id has no unanswered inference runs")
 )

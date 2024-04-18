@@ -4,9 +4,11 @@ package cosmosllm.inference;
 option go_package = "cosmos-llm/x/inference/types";
 
 message InferencerunResponse {
-  
-  uint64 runId = 1; 
-  repeated string responses = 2; 
-  repeated string responders = 3; 
-  bool isfinished = 4; 
+
+  string id = 1;
+  uint64 runId = 2;
+  repeated string responses = 3;
+  repeated string responders = 4;
+  uint64 modelId = 5;
+  bool isfinished = 6;
 }

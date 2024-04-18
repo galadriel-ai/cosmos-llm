@@ -31,6 +31,12 @@ service Query {
     option (google.api.http).get = "/cosmos-llm/inference/get_pool_size";
   
   }
+  
+  // Queries a list of GetUnansweredInferenceRun items.
+  rpc GetUnansweredInferenceRun (QueryGetUnansweredInferenceRunRequest) returns (QueryGetUnansweredInferenceRunResponse) {
+    option (google.api.http).get = "/cosmos-llm/inference/get_unanswered_inference_run/{modelId}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -54,5 +60,13 @@ message QueryGetPoolSizeRequest {}
 
 message QueryGetPoolSizeResponse {
   uint64 size = 1;
+}
+
+message QueryGetUnansweredInferenceRunRequest {
+  uint64 modelId = 1;
+}
+
+message QueryGetUnansweredInferenceRunResponse {
+  Inferencerun inference = 1;
 }
 

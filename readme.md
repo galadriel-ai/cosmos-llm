@@ -26,6 +26,9 @@ cosmos-llmd q inference get-inference-run 0 --chain-id cosmosllm
 cosmos-llmd tx inference join-inference-pool 1 --from bob  --chain-id cosmosllm --fees 5000stake
 # Get pool size
 cosmos-llmd q inference get-pool-size --chain-id cosmosllm
+
+# Get unanswered query by model ID
+cosmos-llmd q inference get-unanswered-inference-run 1 --chain-id cosmosllm
 ```
 
 Get acc balance
